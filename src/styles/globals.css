@@ -1,0 +1,52 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+/* 
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+} */
+
+/* Pagination styles */
+.rc-pagination {
+  list-style: none;
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.rc-pagination .rc-pagination-prev {
+  background-color: white;
+  cursor: pointer;
+  width: fit-content;
+  width: 41px;
+  height: 41px;
+  border-radius: 50px;
+  margin-left: -56px;
+}
+
+.rc-pagination .rc-pagination-prev,
+.rc-pagination-next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
