@@ -29,7 +29,7 @@ const schema = yup.object().shape({
   age: yup.number().required("Umur waji diisi"),
 });
 
-export default function addProduct() {
+export default function addUser() {
   const router = useRouter();
   const [openConfirmation, setOpenConfirmation] = useState<boolean>(false);
   const { updateData, users: userData } = useContext(ContextProvider);
@@ -103,18 +103,19 @@ export default function addProduct() {
         }}
       />
       <Box width="564px">
-        <Link href="/dashboard/product/">
-          <Box mb="32px">
-            <TextIcon
-              color="primary.hard"
-              fontSize="19px"
-              fontWeight="semibold"
-              icon={IconsName.arrowLeft}
-            >
-              Kembali
-            </TextIcon>
-          </Box>
-        </Link>
+        {/* <Link href="/dashboard/users"> */}
+        <Box mb="32px">
+          <TextIcon
+            color="primary.hard"
+            fontSize="19px"
+            fontWeight="semibold"
+            icon={IconsName.arrowLeft}
+            onClick={() => router.push("/dashboard/users")}
+          >
+            Kembali
+          </TextIcon>
+        </Box>
+        {/* </Link> */}
         <Text fontSize="19px" fontWeight="semibold" color="dark.hard">
           {userData?.id ? "Tambah User Baru" : "Edit User"}
         </Text>
