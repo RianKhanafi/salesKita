@@ -51,7 +51,7 @@ export default function addUser() {
   const { saveUser, status, setStatus, updateUser } = userUserMutation();
 
   const onSubmit = handleSubmit((data) => setOpenConfirmation(true));
-
+  console.log("userData =>", userData);
   const handleSave = () => {
     if (userData?.id) {
       const { id, ...rest } = userData;
