@@ -18,8 +18,20 @@ export default function DashboardPage() {
   // const series =
   return (
     <Box borderWidth="1px" borderRadius="lg">
-      <Box display="flex">
-        <Box width="75%" p="25px">
+      <Box
+        display="flex"
+        flexDirection={{
+          base: "column",
+          sm: "column",
+          md: "column",
+          lg: "row",
+          xl: "row",
+        }}
+      >
+        <Box
+          width={{ base: "100%", sm: "100%", md: "100%", lg: "75%", xl: "75%" }}
+          p="25px"
+        >
           <Box mb="32px" ml="15px">
             <Text fontSize="19px" fontWeight="bold">
               Dashboard Pendapatan
@@ -42,7 +54,11 @@ export default function DashboardPage() {
             <LineChart series={data} />
           )}
         </Box>
-        <Flex flexDirection="column" width="25%" borderLeftWidth="1px">
+        <Flex
+          flexDirection="column"
+          width={{ base: "100%", sm: "100%", md: "100%", lg: "25%", xl: "25%" }}
+          borderLeftWidth="1px"
+        >
           <Box flex="1" width="100%" borderBottomWidth="1px">
             <Text
               fontSize="19px"

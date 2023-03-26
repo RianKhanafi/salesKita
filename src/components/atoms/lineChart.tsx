@@ -136,7 +136,7 @@ export default function LineChart({ series }: ILineChart) {
     selection: "one_year",
   };
 
-  return <Chart options={options} series={series} type="line" width="800px" />;
+  return <Chart options={options} series={series} type="line" width="100%" />;
 
   // return <div>a</div>;
 }

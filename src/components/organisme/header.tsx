@@ -78,27 +78,54 @@ export default function Header() {
               ref={menuRef}
             >
               <Box
-                width={{ base: "100%", md: 540, lg: 540, xl: 540 }}
+                width={{ base: "100%", sm: "100%", md: 540, lg: 540, xl: 540 }}
                 height={{
                   base: "100vh",
-                  md: "100vh",
+                  sm: "100vh",
+                  md: "initial",
                   xl: "initial",
                   lg: "initial",
                 }}
                 display="flex"
+                backgroundColor="white"
                 position={{
                   base: "fixed",
                   md: "relative",
+                  sm: "relative",
                   lg: "relative",
                   xl: "relative",
                 }}
-                left={{ base: 0, md: "unset", lg: "unset", xl: "unset" }}
-                right={{ base: 0, md: "unset", lg: "unset", xl: "unset" }}
-                top={{ base: 0, md: "unset", lg: "unset", xl: "unset" }}
-                bottom={{ base: 0, md: "unset", lg: "unset", xl: "unset" }}
-                backgroundColor="white"
+                left={{
+                  base: 0,
+                  sm: "unset",
+                  md: "unset",
+                  lg: "unset",
+                  xl: "unset",
+                }}
+                right={{
+                  base: 0,
+                  sm: "unset",
+                  md: "unset",
+                  lg: "unset",
+                  xl: "unset",
+                }}
+                top={{
+                  base: 0,
+                  sm: "unset",
+                  md: "unset",
+                  lg: "unset",
+                  xl: "unset",
+                }}
+                bottom={{
+                  base: 0,
+                  sm: "unset",
+                  md: "unset",
+                  lg: "unset",
+                  xl: "unset",
+                }}
                 overflow={{
                   base: "hidden",
+                  sm: "hidden",
                   md: "initial",
                   lg: "initial",
                   xl: "initial",
@@ -110,6 +137,7 @@ export default function Header() {
                     p="20px"
                     display={{
                       base: "block",
+                      sm: "block",
                       md: "none",
                       lg: "none",
                       xl: "mone",
@@ -179,6 +207,7 @@ export default function Header() {
                       mt="60px"
                       display={{
                         base: "block",
+                        sm: "block",
                         md: "none",
                         lg: "none",
                         xl: "mone",

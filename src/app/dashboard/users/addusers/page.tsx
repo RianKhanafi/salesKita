@@ -158,7 +158,7 @@ export default function addUser() {
                 control={control}
                 render={({ field }) => (
                   <FormInput
-                    label="Nama Depan"
+                    label="Nama Belakang"
                     inputType="input"
                     placeholder="Masukan nama belakang"
                     full
@@ -175,7 +175,7 @@ export default function addUser() {
                 control={control}
                 render={({ field }) => (
                   <FormInput
-                    label="Nama Depan"
+                    label="Umur"
                     inputType="input"
                     placeholder="Masukan umur anda"
                     full
