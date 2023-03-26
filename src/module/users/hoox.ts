@@ -59,6 +59,32 @@ const useFetchUser = (params: string) => {
   return { data, status };
 };
 
+const useFetchUserbyId = () => {
+  const [data, setData] = useState<IUser>({
+    firstName: "",
+    lastName: "",
+    age: 0,
+  });
+  const [status, setStatus] = useState<STATUS>(STATUS.idle);
+
+  const fetchUser = async (id: number) => {
+    setStatus(STATUS.loading);
+    try {
+      const response = await axiosApp.get(`/users/${id}`);
+
+      if (response.status === 200) {
+        setStatus(STATUS.success);
+        setData(response.data);
+      } else {
+        setStatus(STATUS.error);
+      }
+    } catch (err) {
+      setStatus(STATUS.error);
+    }
+  };
+  return { data, status, fetchUser };
+};
+
 const userUserMutation = () => {
   const [status, setStatus] = useState<STATUS>(STATUS.idle);
 
@@ -133,4 +159,4 @@ const usersLogin = () => {
   return { login, status, logout };
 };
 
-export { useFetchUser, userUserMutation, usersLogin };
+export { useFetchUser, userUserMutation, usersLogin, useFetchUserbyId };

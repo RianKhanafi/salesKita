@@ -1,10 +1,9 @@
 "use client";
 import { Box, Text } from "@chakra-ui/react";
-import Icons, { IconsName } from "assets/icons";
-import { Button, ButtonIcon, Input } from "components/atoms";
+import { IconsName } from "assets/icons";
+import { ButtonIcon, Input } from "components/atoms";
 import { Confirmation, Success } from "components/molecules";
 import Table, { ColumnDefinitionType } from "components/molecules/Table";
-import { ContextProvider } from "context/context";
 import {
   IUser,
   STATUS,
@@ -29,7 +28,6 @@ export default function Productpage() {
   );
   const [usersData, setUsersData] = useState<IUser | null>();
   const { deleteUser, status: mutationStatus, setStatus } = userUserMutation();
-  const { updateData, users: userData } = useContext(ContextProvider);
 
   const columns: ColumnDefinitionType<
     ITableColumnOptional,
@@ -69,13 +67,7 @@ export default function Productpage() {
 
           <Text
             onClick={() => {
-              updateData({
-                firstName: e.firstName,
-                lastName: e.lastName,
-                age: e.age,
-                id: e.id,
-              });
-              router.push("/dashboard/users/addusers");
+              router.push(`/dashboard/users/addusers?id=${e.id}`);
             }}
             cursor="pointer"
           >

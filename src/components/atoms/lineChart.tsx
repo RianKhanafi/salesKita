@@ -3,10 +3,16 @@ import Chart, { Props } from "react-apexcharts";
 import dynamic from "next/dynamic";
 
 // const Chart = dynamic(() => import('react-apexcharts";'), { ssr: false });
+export interface ISeries {
+  name: string;
+  data: number[];
+}
+
 interface ILineChart extends Props {
   width?: number;
+  series: ISeries[];
 }
-export default function LineChart() {
+export default function LineChart({ series }: ILineChart) {
   const options: Props = {
     chart: {
       height: 380,
@@ -130,16 +136,6 @@ export default function LineChart() {
     selection: "one_year",
   };
 
-  const series = [
-    {
-      name: "series-1",
-      data: [10, 20, 22, 50, 20, 30],
-    },
-    {
-      name: "series-1",
-      data: [20, 17, 10, 30, 18, 40],
-    },
-  ];
   return <Chart options={options} series={series} type="line" width="800px" />;
 
   // return <div>a</div>;

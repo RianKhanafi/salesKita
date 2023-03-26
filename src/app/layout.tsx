@@ -4,7 +4,7 @@ import "styles/globals.css";
 
 import React, { useState } from "react";
 import { openSans } from "theme/font";
-import { ContextProvider } from "context/context";
+
 import { IUser } from "module/users/hoox";
 import { theme } from "theme/theme";
 
@@ -22,15 +22,13 @@ export default function RootLayout({
   return (
     <html>
       <head>
-        <title>POSKita</title>
+        <title>SalesKita</title>
       </head>
 
       <body className={openSans.className}>
-        <ContextProvider.Provider value={{ users: data, updateData }}>
-          <ChakraProvider theme={theme}>
-            <React.Fragment>{children}</React.Fragment>
-          </ChakraProvider>
-        </ContextProvider.Provider>
+        <ChakraProvider theme={theme}>
+          <React.Fragment>{children}</React.Fragment>
+        </ChakraProvider>
       </body>
     </html>
   );

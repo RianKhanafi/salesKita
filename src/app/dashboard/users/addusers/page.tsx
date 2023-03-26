@@ -4,14 +4,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { IconsName } from "assets/icons";
 import { Button, Text, TextIcon } from "components/atoms";
 import { FormInput, Confirmation, Success } from "components/molecules";
-import { IUser, STATUS, userUserMutation } from "module/users/hoox";
+import {
+  IUser,
+  STATUS,
+  userUserMutation,
+  useFetchUserbyId,
+} from "module/users/hoox";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import * as yup from "yup";
-import { ContextProvider } from "context/context";
 
 type TUsersForm = IUser;
 
@@ -31,8 +35,10 @@ const schema = yup.object().shape({
 
 export default function addUser() {
   const router = useRouter();
+  const id = useSearchParams().get("id");
+
   const [openConfirmation, setOpenConfirmation] = useState<boolean>(false);
-  const { updateData, users: userData } = useContext(ContextProvider);
+
   const {
     handleSubmit,
     formState: { errors },
@@ -49,25 +55,36 @@ export default function addUser() {
   });
 
   const { saveUser, status, setStatus, updateUser } = userUserMutation();
+  const { data, status: userIdStatus, fetchUser } = useFetchUserbyId();
 
   const onSubmit = handleSubmit((data) => setOpenConfirmation(true));
-  console.log("userData =>", userData);
+
+  useEffect(() => {
+    if (id) fetchUser(Number(id));
+  }, [id]);
+
   const handleSave = () => {
-    if (userData?.id) {
-      const { id, ...rest } = userData;
-      updateUser(rest, id);
+    if (data?.id) {
+      updateUser(
+        {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          age: data.age,
+        },
+        Number(id)
+      );
     } else {
       saveUser(getValues());
     }
   };
 
   useEffect(() => {
-    if (userData?.id) {
-      setValue("firstName", userData.firstName);
-      setValue("lastName", userData.lastName);
-      setValue("age", userData.age);
+    if (data?.id) {
+      setValue("firstName", data.firstName);
+      setValue("lastName", data.lastName);
+      setValue("age", data.age);
     }
-  }, [userData]);
+  }, [data]);
 
   return (
     <Box
@@ -80,9 +97,7 @@ export default function addUser() {
         onContinue={handleSave}
         isLoading={status === STATUS.loading}
         message={
-          userData?.id
-            ? "Anda yakin mengubah data?"
-            : "Anda yakin menyimpan data?"
+          id ? "Anda yakin mengubah data?" : "Anda yakin menyimpan data?"
         }
       />
       <Success
@@ -92,9 +107,7 @@ export default function addUser() {
           setStatus(STATUS.idle);
         }}
         message={
-          userData?.id
-            ? "Anda yakin mengubah data?"
-            : "Anda yakin menyimpan data?"
+          id ? "Anda yakin mengubah data?" : "Anda yakin menyimpan data?"
         }
         onContinue={() => {
           setOpenConfirmation(false);
@@ -103,7 +116,6 @@ export default function addUser() {
         }}
       />
       <Box width="564px">
-        {/* <Link href="/dashboard/users"> */}
         <Box mb="32px">
           <TextIcon
             color="primary.hard"
@@ -117,7 +129,7 @@ export default function addUser() {
         </Box>
         {/* </Link> */}
         <Text fontSize="19px" fontWeight="semibold" color="dark.hard">
-          {userData?.id ? "Tambah User Baru" : "Edit User"}
+          {id ? "Tambah User Baru" : "Edit User"}
         </Text>
 
         <form onSubmit={onSubmit}>

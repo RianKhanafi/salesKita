@@ -28,7 +28,9 @@
     "src/types/*.d.ts",
     ".next/types/**/*.ts",
     "src/assets/icons/more",
-    "src/assets/icons/more"
+    "src/assets/icons/more",
+    "src/app/dashboard/users/addusers/[id].tss",
+    "src/app/dashboard/users/addusers/[id].tss"
   ],
   "exclude": ["node_modules"]
 }

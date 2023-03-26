@@ -116,7 +116,7 @@ export default function LoginPage() {
             </Link>
             <Link href="/dashboard/auth/registration">
               <Text color="primary.hard" fontSize="12px">
-                Buat akun PosKita?
+                Buat akun SalesKita?
               </Text>
             </Link>
           </Box>

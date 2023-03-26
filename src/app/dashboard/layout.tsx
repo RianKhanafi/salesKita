@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html>
       <head>
-        <title>POSKita</title>
+        <title>SalesKita</title>
       </head>
 
       <body>

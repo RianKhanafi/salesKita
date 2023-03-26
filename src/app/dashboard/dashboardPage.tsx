@@ -1,6 +1,11 @@
 "use client";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 import { Text } from "components/atoms";
+import {
+  STATUS,
+  useFetchDashboard,
+  useFetchTarget,
+} from "module/dashboard/hook";
 import dynamic from "next/dynamic";
 const LineChart = dynamic(() => import("components/atoms/lineChart"), {
   ssr: false,
@@ -8,6 +13,9 @@ const LineChart = dynamic(() => import("components/atoms/lineChart"), {
 // import { parseJwt } from "store/features/api/api";
 
 export default function DashboardPage() {
+  const { data, status } = useFetchDashboard();
+  const { data: dataTarget, status: statusTarget } = useFetchTarget();
+  // const series =
   return (
     <Box borderWidth="1px" borderRadius="lg">
       <Box display="flex">
@@ -17,10 +25,22 @@ export default function DashboardPage() {
               Dashboard Pendapatan
             </Text>
             <Text fontSize="12px" fontWeight="regular" color="gray.medium">
-              as of 25 May 2019, 09:41 PM
+              as of 26 May 2023
             </Text>
           </Box>
-          <LineChart />
+          {status === STATUS.loading ? (
+            <Box
+              display="flex"
+              justifyContent="center"
+              height="300px"
+              alignItems="center"
+              width="100%"
+            >
+              <Spinner color="primary.hard" size="xl" />
+            </Box>
+          ) : (
+            <LineChart series={data} />
+          )}
         </Box>
         <Flex flexDirection="column" width="25%" borderLeftWidth="1px">
           <Box flex="1" width="100%" borderBottomWidth="1px">
@@ -40,7 +60,18 @@ export default function DashboardPage() {
               color="dark.medium"
               paddingY="24px"
             >
-              43
+              {status === STATUS.loading ? (
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  width="100%"
+                >
+                  <Spinner color="primary.hard" size="md" />
+                </Box>
+              ) : (
+                dataTarget.sold
+              )}
             </Text>
           </Box>
           <Box flex="1" width="100%" borderBottomWidth="1px" boxShadow="xs">
@@ -60,7 +91,18 @@ export default function DashboardPage() {
               color="primary.hard"
               paddingY="24px"
             >
-              20
+              {status === STATUS.loading ? (
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  width="100%"
+                >
+                  <Spinner color="primary.hard" size="md" />
+                </Box>
+              ) : (
+                dataTarget.productTotal
+              )}
             </Text>
           </Box>
           <Box flex="1" width="100%" borderBottomWidth="1px">
@@ -80,7 +122,18 @@ export default function DashboardPage() {
               color="dark.medium"
               paddingY="24px"
             >
-              1
+              {status === STATUS.loading ? (
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  width="100%"
+                >
+                  <Spinner color="primary.hard" size="md" />
+                </Box>
+              ) : (
+                dataTarget.customer
+              )}
             </Text>
           </Box>
         </Flex>
